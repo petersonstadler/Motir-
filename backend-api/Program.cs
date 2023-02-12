@@ -29,8 +29,31 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+AplicarMigrationInicial();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+void AplicarMigrationInicial()
+{
+    try
+    {
+        if(app != null)
+        {
+            using (var serviceScope = app.Services.CreateScope())
+            {
+                var serviceDb = serviceScope.ServiceProvider
+                    .GetService<AppPrincipalContext>();
+                if(serviceDb != null)
+                    serviceDb.Database.Migrate();
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+}
