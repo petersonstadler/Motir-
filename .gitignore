@@ -478,3 +478,4 @@ $RECYCLE.BIN/
 
 # Database sqlite local
 backend-api/Data/localdb/*
+frontend-sistema/Data/localdb/*
