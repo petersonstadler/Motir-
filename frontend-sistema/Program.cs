@@ -1,4 +1,4 @@
-using backend_api.Data;
+using frontend_sistema.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => {
             options.SignIn.RequireConfirmedAccount = false;
@@ -18,7 +22,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
             options.Password.RequireUppercase = false;
         })
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<AppPrincipalContext>();
+    .AddEntityFrameworkStores<AppDbContext>();
 
 var app = builder.Build();
 
@@ -54,7 +58,7 @@ void AplicarMigrationInicial()
             using (var serviceScope = app.Services.CreateScope())
             {
                 var serviceDb = serviceScope.ServiceProvider
-                    .GetService<AppPrincipalContext>();
+                    .GetService<AppDbContext>();
                 if(serviceDb != null)
                     serviceDb.Database.Migrate();
             }
