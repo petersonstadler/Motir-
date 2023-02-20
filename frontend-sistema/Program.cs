@@ -1,4 +1,6 @@
 using frontend_sistema.Data;
+using frontend_sistema.Repositories;
+using frontend_sistema.Repositories.Implementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +25,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
         })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddTransient<IPatrocinadorRepository, PatrocinadorRepository>();
 
 var app = builder.Build();
 
