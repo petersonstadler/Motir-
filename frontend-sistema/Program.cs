@@ -41,8 +41,8 @@ app.UseRouting();
 
 AplicarMigrationInicial();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
