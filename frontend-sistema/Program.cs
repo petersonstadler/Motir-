@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connString = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connString));
 
@@ -42,10 +42,13 @@ app.UseRouting();
 AplicarMigrationInicial();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
 
@@ -59,8 +62,8 @@ void AplicarMigrationInicial()
             {
                 var serviceDb = serviceScope.ServiceProvider
                     .GetService<AppDbContext>();
-                if(serviceDb != null)
-                    serviceDb.Database.Migrate();
+                if (serviceDb != null)
+                    serviceDb.Database.MigrateAsync();
             }
         }
     }

@@ -11,8 +11,8 @@ using frontend_sistema.Data;
 namespace frontendsistema.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230215110938_initial")]
-    partial class initial
+    [Migration("20230215174618_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

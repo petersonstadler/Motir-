@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace frontend_sistema.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
