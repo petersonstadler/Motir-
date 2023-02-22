@@ -1,8 +1,25 @@
 @model IEnumerable<frontend_sistema.Models.Patrocinador>
 
-@foreach (var patrocinador in Model)
-{
-    <p>@patrocinador.Nome.ToString()</p>
-}
+<h1>Todos Patrocinadores</h1>
 
-
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Status</th>
+                <th scope="col">Responsavel</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patrocinador in Model)
+            {
+                <tr scope="row">
+                    <td>@patrocinador.Nome</td>
+                    <td><span class="btn btn-success btn-sm">@patrocinador.Status</span></td>
+                    <td>@patrocinador.Responsavel</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
