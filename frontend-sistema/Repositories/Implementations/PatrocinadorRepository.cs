@@ -1,16 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using backend_api.Models;
+using frontend_sistema.Models;
+using frontend_sistema.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace frontend_sistema.Repositories.Implementations
 {
     public class PatrocinadorRepository : IPatrocinadorRepository
     {
-        public Task<IEnumerable<Patrocinador>> GetAll()
+        public async Task<IEnumerable<Patrocinador>> GetAll()
         {
-            throw new NotImplementedException();
+            var apiResult = await HttpClientHelper.GetAsync("/api/Patrocinadores/GetAll");
+            IEnumerable<Patrocinador>? patrocinadores;
+            try
+            {
+                patrocinadores = JsonConvert.DeserializeObject<IEnumerable<Patrocinador>>(apiResult);
+            }
+            catch(Exception e)
+            {
+                throw(new Exception(e.Message));
+            }
+            return patrocinadores ?? new List<Patrocinador>();
         }
     }
 }

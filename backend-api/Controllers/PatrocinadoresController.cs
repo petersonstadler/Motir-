@@ -33,7 +33,7 @@ namespace backend_api.Controllers
         public async Task<ActionResult> Post(Patrocinador patrocinador)
         {
             if(!await _context.Novo(patrocinador))
-                return NotFound("Patrocinador não encontrado!");
+                return NotFound("Falha ao tentar criar patrocinador!");
             return Ok(patrocinador);
         }
 
@@ -41,7 +41,7 @@ namespace backend_api.Controllers
         public async Task<ActionResult> Put(int id, Patrocinador patrocinador)
         {
             if(!await _context.Atualizar(id, patrocinador))
-                return NotFound("Patrocinador não encontrado!");
+                return NotFound("Falha ao tetnar alterar patrocinador!");
             return Ok(patrocinador);
         }
 
@@ -49,7 +49,7 @@ namespace backend_api.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             if(!await _context.Deletar(id))
-                return NotFound("Patrocinador não encontrado!");
+                return NotFound("Falha ao tentar excluir patrocinador!");
             return Ok("Deletado com sucesso!");
         }
     }

@@ -1,4 +1,4 @@
-using backend_api.Models;
+using frontend_sistema.Models;
 
 namespace frontend_sistema.Repositories
 {

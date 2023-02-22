@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace backend_api.Models
+namespace frontend_sistema.Models
 {
     public class Patrocinador
     {

@@ -1,4 +1,4 @@
-using backend_api.Models;
+using frontend_sistema.Models;
 using frontend_sistema.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
