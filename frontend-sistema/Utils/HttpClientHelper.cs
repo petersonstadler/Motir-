@@ -21,7 +21,24 @@ namespace frontend_sistema.Utils
             }
             catch(Exception e)
             {
-                throw(new Exception(e.Message));
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public async static Task<string> PostAsync(string uriApiAction, object content)
+        {
+            try
+            {
+                var httpResponse = await _httpClient.PostAsJsonAsync(uriApiAction, content);
+                if(httpResponse.IsSuccessStatusCode)
+                {
+                    return await httpResponse.Content.ReadAsStringAsync();
+                }
+                return "Não foi possível realizar a operação. Causa: " + httpResponse.RequestMessage;
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
             }
         }
     }

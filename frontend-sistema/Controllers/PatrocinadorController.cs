@@ -30,5 +30,11 @@ namespace frontend_sistema.Controllers
             IEnumerable<Patrocinador> patrocinadores = await _patrocinadorRepository.GetAll();
             return View(patrocinadores);
         }
+
+        [HttpGet("Registrar")]
+        public IActionResult Registrar()
+        {
+            return View(new Patrocinador());
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace frontend_sistema.Models
         [Required]
         public string? Resposta { get; set; }
         [Required]
+        [Display(Name = "Forma de contato")]
         public string? FormaDeContato { get; set; }
         [Required]
         [Range(1,100000)]
@@ -19,8 +20,10 @@ namespace frontend_sistema.Models
         [Required]
         public string? Status { get; set; }
         [MaxLength(1000)]
+        [Display(Name = "Observações")]
         public string? Observacoes { get; set; }
         [Required]
+        [Display(Name = "Responsável")]
         public string? Responsavel { get; set; }
     }
 }

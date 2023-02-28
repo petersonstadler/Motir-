@@ -12,22 +12,22 @@ namespace backend_api.Data
 
         public DbSet<Patrocinador>? Patrocinadores { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Patrocinador>()
-                .HasData(new List<Patrocinador>(){
-                    new Patrocinador
-                    {
-                       FormaDeContato = "Pessoalmente",
-                       Id = 1,
-                       Nome = "Peterson",
-                       Observacoes = "Teste",
-                       Responsavel = "Peter",
-                       Resposta = "Sim",
-                       Status = "Pendente",
-                       Valor = 100
-                    }
-                });
-        }
+        // protected override void OnModelCreating(ModelBuilder builder)
+        // {
+        //     builder.Entity<Patrocinador>()
+        //         .HasData(new List<Patrocinador>(){
+        //             new Patrocinador
+        //             {
+        //                FormaDeContato = "Pessoalmente",
+        //                Id = 1,
+        //                Nome = "Peterson",
+        //                Observacoes = "Teste",
+        //                Responsavel = "Peter",
+        //                Resposta = "Sim",
+        //                Status = "Pendente",
+        //                Valor = 100
+        //             }
+        //         });
+        // }
     }
 }
