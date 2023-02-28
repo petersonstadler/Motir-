@@ -17,7 +17,7 @@ namespace frontend_sistema.Repositories.Implementations
             }
             catch(Exception e)
             {
-                throw(new Exception(e.Message));
+                throw new Exception(e.Message, e);
             }
             return patrocinadores ?? new List<Patrocinador>();
         }

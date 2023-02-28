@@ -7,12 +7,12 @@ namespace frontend_sistema.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class PatrocinadorController : Controller
+    public class PatrocinadoresController : Controller
     {
-        private readonly ILogger<PatrocinadorController> _logger;
+        private readonly ILogger<PatrocinadoresController> _logger;
         private readonly IPatrocinadorRepository _patrocinadorRepository;
 
-        public PatrocinadorController(ILogger<PatrocinadorController> logger, IPatrocinadorRepository patrocinadorRepository)
+        public PatrocinadoresController(ILogger<PatrocinadoresController> logger, IPatrocinadorRepository patrocinadorRepository)
         {
             _logger = logger;
             _patrocinadorRepository = patrocinadorRepository;
@@ -35,6 +35,13 @@ namespace frontend_sistema.Controllers
         public IActionResult Registrar()
         {
             return View(new Patrocinador());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cadastrar(Patrocinador patrocinador)
+        {
+            return RedirectToAction("ListarTodos");
         }
     }
 }
