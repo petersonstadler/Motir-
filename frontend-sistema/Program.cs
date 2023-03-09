@@ -1,6 +1,8 @@
 using frontend_sistema.Data;
 using frontend_sistema.Repositories;
 using frontend_sistema.Repositories.Implementations;
+using frontend_sistema.Services;
+using frontend_sistema.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +29,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddTransient<IPatrocinadorRepository, PatrocinadorRepository>();
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRolesInitital>();
 
 var app = builder.Build();
 
@@ -44,6 +47,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 AplicarMigrationInicial();
+CriarPerfisUsuariosInitials(app);
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -74,5 +78,22 @@ void AplicarMigrationInicial()
     catch (Exception e)
     {
         Console.WriteLine(e.Message);
+    }
+}
+
+void CriarPerfisUsuariosInitials(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    if (scopedFactory != null)
+    {
+        using (var scope = scopedFactory.CreateScope())
+        {
+            var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+            if (service != null)
+            {
+                service.SeedRoles();
+                service.SeedUsers();
+            }
+        }
     }
 }
