@@ -21,6 +21,7 @@ using Microsoft.Extensions.Logging;
 
 namespace frontend_sistema.Areas.Identity.Pages.Account
 {
+    [Authorize]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -75,8 +76,7 @@ namespace frontend_sistema.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Usuário")]
             public string Email { get; set; }
 
             /// <summary>
