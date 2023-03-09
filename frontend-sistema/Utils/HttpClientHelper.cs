@@ -8,6 +8,7 @@ namespace frontend_sistema.Utils
         {
             IConfiguration config = new ConfigurationBuilder().Build();
             var client = new HttpClient();
+            client.Timeout = TimeSpan.FromSeconds(230);
             client.BaseAddress = new Uri(config.GetSection("ApiSettings")
                                                .GetSection("BaseAddress").Value ?? "http://localhost:5050");
             return client;
@@ -30,11 +31,7 @@ namespace frontend_sistema.Utils
             try
             {
                 var httpResponse = await _httpClient.PostAsJsonAsync(uriApiAction, content);
-                if(httpResponse.IsSuccessStatusCode)
-                {
-                    return await httpResponse.Content.ReadAsStringAsync();
-                }
-                return "Não foi possível realizar a operação. Causa: " + httpResponse.RequestMessage;
+                return await httpResponse.Content.ReadAsStringAsync();
             }
             catch(Exception e)
             {
