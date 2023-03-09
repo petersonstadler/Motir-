@@ -41,7 +41,9 @@ namespace frontend_sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Cadastrar(Patrocinador patrocinador)
         {
-            return RedirectToAction("ListarTodos");
+            if(ModelState.IsValid)
+                await _patrocinadorRepository.UpdateAsync(patrocinador);
+            return RedirectToAction("Index");
         }
     }
 }

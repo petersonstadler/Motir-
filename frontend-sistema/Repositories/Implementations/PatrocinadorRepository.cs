@@ -21,5 +21,17 @@ namespace frontend_sistema.Repositories.Implementations
             }
             return patrocinadores ?? new List<Patrocinador>();
         }
+
+        public async Task<string> UpdateAsync(Patrocinador patrocinador)
+        {
+            try
+            {
+                return await HttpClientHelper.PostAsync("api/Patrocinadores", patrocinador);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
     }
 }
