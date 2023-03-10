@@ -5,7 +5,7 @@ namespace frontend_sistema.Models
     public class Patrocinador
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "É obrigatório informar o nome.")]
         [MinLength(3, ErrorMessage = "O nome precisa conter pelo menos 3 letras!")]
         [MaxLength(300, ErrorMessage = "O nome precisa conter no máximo 300 letras!")]
         public string? Nome { get; set; }
@@ -14,8 +14,9 @@ namespace frontend_sistema.Models
         [Required]
         [Display(Name = "Forma de contato")]
         public string? FormaDeContato { get; set; }
-        [Required]
-        [Range(1,100000)]
+        [Required(ErrorMessage = "É o brigatório informar o valor.")]
+        [Range(0,100000, ErrorMessage = "O valor precisa ser positivo.")]
+        [DataType(DataType.Currency, ErrorMessage = "O tipo do valor está inválido.")]
         public decimal Valor { get; set; }
         [Required]
         public string? Status { get; set; }

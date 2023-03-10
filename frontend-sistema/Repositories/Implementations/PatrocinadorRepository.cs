@@ -1,7 +1,6 @@
 using frontend_sistema.Models;
 using frontend_sistema.Utils;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace frontend_sistema.Repositories.Implementations
 {
@@ -22,7 +21,7 @@ namespace frontend_sistema.Repositories.Implementations
             return patrocinadores ?? new List<Patrocinador>();
         }
 
-        public async Task<string> UpdateAsync(Patrocinador patrocinador)
+        public async Task<string> CreateAsync(Patrocinador patrocinador)
         {
             try
             {

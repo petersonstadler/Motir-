@@ -34,16 +34,28 @@ namespace frontend_sistema.Controllers
         [HttpGet("Registrar")]
         public IActionResult Registrar()
         {
-            return View(new Patrocinador());
+            return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cadastrar(Patrocinador patrocinador)
+        [HttpPost("Registrar")]
+        public async Task<IActionResult> Registrar(Patrocinador patrocinador)
         {
             if(ModelState.IsValid)
-                await _patrocinadorRepository.UpdateAsync(patrocinador);
-            return RedirectToAction("Index");
+            {
+                var response = await _patrocinadorRepository.CreateAsync(patrocinador);
+                return RedirectToAction("Index", "Home");
+            }
+            return View(patrocinador);
+        }
+
+        [HttpPut("Alterar/{id}")]
+        public IActionResult Alterar(int id, [FromBody] Patrocinador patrocinador)
+        {
+            if(ModelState.IsValid)
+            {
+                
+            }
+            return RedirectToAction("MessagePage");
         }
     }
 }
