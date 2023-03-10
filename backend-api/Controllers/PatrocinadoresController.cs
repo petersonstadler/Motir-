@@ -34,7 +34,7 @@ namespace backend_api.Controllers
         {
             if(!await _repository.Novo(patrocinador))
                 return NotFound("Falha ao tentar criar patrocinador!");
-            return Ok(patrocinador);
+            return Ok("Patrocinador registrado com sucesso!");
         }
 
         [HttpPut]
@@ -42,7 +42,7 @@ namespace backend_api.Controllers
         {
             if(!await _repository.Atualizar(id, patrocinador))
                 return NotFound("Falha ao tetnar alterar patrocinador!");
-            return Ok(patrocinador);
+            return Ok("Patrocinador alterado com sucesso!");
         }
 
         [HttpDelete]
@@ -50,7 +50,7 @@ namespace backend_api.Controllers
         {
             if(!await _repository.Deletar(id))
                 return NotFound("Falha ao tentar excluir patrocinador!");
-            return Ok("Deletado com sucesso!");
+            return Ok("Patrocinador deletado com sucesso!");
         }
     }
 }

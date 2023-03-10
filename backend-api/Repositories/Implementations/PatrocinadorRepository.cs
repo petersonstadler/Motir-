@@ -45,7 +45,7 @@ namespace backend_api.Repositories.Implementations
             }
             catch(Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, e.Message);
             }
             return false;
         }
@@ -69,7 +69,7 @@ namespace backend_api.Repositories.Implementations
             }
             catch(Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, e.Message);
             }
             return false;
         }
@@ -91,7 +91,7 @@ namespace backend_api.Repositories.Implementations
             }
             catch(Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.LogError(e, e.Message);
             }
             return false;
         }
