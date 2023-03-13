@@ -9,6 +9,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Status</th>
                 <th scope="col">Responsavel</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                     <td>@patrocinador.Nome</td>
                     <td><span class="badge bg-success small">@patrocinador.Status</span></td>
                     <td>@patrocinador.Responsavel</td>
+                    <td><a class="btn btn-primary" asp-action="Alterar" asp-route-id="@patrocinador.Id">alterar</a></td>
                 </tr>
             }
         </tbody>

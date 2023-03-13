@@ -95,5 +95,22 @@ namespace backend_api.Repositories.Implementations
             }
             return false;
         }
+
+        public async Task<Patrocinador?> GetById(int id)
+        {
+            try
+            {
+                if (_context.Patrocinadores != null)
+                {
+                    var patrocinador = await _context.Patrocinadores.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+                    return patrocinador;
+                }
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e, e.Message);
+            }
+            return null;
+        }
     }
 }

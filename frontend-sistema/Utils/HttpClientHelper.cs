@@ -38,5 +38,18 @@ namespace frontend_sistema.Utils
                 throw new Exception(e.Message, e);
             }
         }
+
+        public async static Task<string> PutAsync(string uriApiAction, object content)
+        {
+            try
+            {
+                var httpResponse = await _httpClient.PutAsJsonAsync(uriApiAction, content);
+                return await httpResponse.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
     }
 }

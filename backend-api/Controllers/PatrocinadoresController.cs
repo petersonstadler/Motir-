@@ -29,6 +29,22 @@ namespace backend_api.Controllers
             return Ok(await _repository.GetByResponsavel(responsavel.ToUpper()));
         }
 
+        [HttpGet("GetById/{id}")]
+        public async Task<IActionResult> GetbyId(int id)
+        {
+            try
+            {
+                var patrocinador = await _repository.GetById(id);
+                if (patrocinador != null)
+                    return Ok(patrocinador);
+                else return BadRequest("Falha ao buscar patrocinador.");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult> Post(Patrocinador patrocinador)
         {
@@ -37,11 +53,11 @@ namespace backend_api.Controllers
             return Ok("Patrocinador registrado com sucesso!");
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, Patrocinador patrocinador)
         {
             if(!await _repository.Atualizar(id, patrocinador))
-                return NotFound("Falha ao tetnar alterar patrocinador!");
+                return NotFound("Falha ao tentar alterar patrocinador!");
             return Ok("Patrocinador alterado com sucesso!");
         }
 

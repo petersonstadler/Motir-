@@ -6,6 +6,7 @@ namespace backend_api.Repositories.Interfaces
     {
         Task<IEnumerable<Patrocinador>> GetAll();
         Task<IEnumerable<Patrocinador>> GetByResponsavel(string responsavel);
+        Task<Patrocinador> GetById(int id);
         Task<bool> Novo(Patrocinador patrocinador);
         Task<bool> Atualizar(int id, Patrocinador newPatrocinador);
         Task<bool> Deletar(int id);

@@ -18,11 +18,42 @@ namespace frontend_sistema.Controllers
             _patrocinadorRepository = patrocinadorRepository;
         }
 
-        [HttpGet]
+        [HttpGet("ListarTodos")]
         public async Task<IActionResult> ListarTodos()
         {
-            IEnumerable<Patrocinador> patrocinadores = await _patrocinadorRepository.GetAll();
-            return View(patrocinadores);
+            try
+            {
+                IEnumerable<Patrocinador> patrocinadores = await _patrocinadorRepository.GetAll();
+                return View(patrocinadores);
+            }
+            catch(Exception)
+            {
+                var message = new Message
+                {
+                    MessageText = "Não foi possivel buscar os patrocinadores.",
+                    IsSuccess = false
+                };
+                return RedirectToAction("IndexMessage", "Home", message);
+            }
+        }
+
+        [HttpGet("Alterar/{id}")]
+        public async Task<IActionResult> Alterar(int id)
+        {
+            try
+            {
+                Patrocinador? patrocinador = await _patrocinadorRepository.GetById(id);
+                return View(patrocinador);
+            }
+            catch (Exception)
+            {
+                var message = new Message
+                {
+                    MessageText = "Falha ao buscar o patrocinador.",
+                    IsSuccess = false
+                };
+                return RedirectToAction("IndexMessage", "Home", message);
+            }
         }
 
         [HttpGet("Registrar")]
@@ -37,13 +68,12 @@ namespace frontend_sistema.Controllers
             if(ModelState.IsValid)
             {
                 var message = new Message();
-                var response = string.Empty;
                 try
                 {
-                    response = await _patrocinadorRepository.CreateAsync(patrocinador);
+                    string? response = await _patrocinadorRepository.CreateAsync(patrocinador);
                     message.MessageText = response;
                     message.IsSuccess = true;
-                }catch (Exception ex)
+                }catch (Exception)
                 {
                     message.IsSuccess = false;
                     message.MessageText = "Falha ao registrar novo patrocinador.";
@@ -53,14 +83,26 @@ namespace frontend_sistema.Controllers
             return View(patrocinador);
         }
 
-        [HttpPut("Alterar/{id}")]
-        public IActionResult Alterar(int id, [FromBody] Patrocinador patrocinador)
+        [HttpPut("Alterar")]
+        public async Task<IActionResult> Alterar([FromBody] Patrocinador patrocinador)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                
+                var message = new Message();
+                try
+                {
+                    string? response = await _patrocinadorRepository.UpdateAsync(patrocinador);
+                    message.MessageText = response;
+                    message.IsSuccess = true;
+                }
+                catch (Exception)
+                {
+                    message.IsSuccess = false;
+                    message.MessageText = "Falha ao alterar patrocinador.";
+                }
+                return RedirectToAction("IndexMessage", "Home", message);
             }
-            return RedirectToAction("MessagePage");
+            return View(patrocinador);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
