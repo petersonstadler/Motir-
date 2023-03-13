@@ -18,12 +18,6 @@ namespace frontend_sistema.Controllers
             _patrocinadorRepository = patrocinadorRepository;
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
-
         [HttpGet]
         public async Task<IActionResult> ListarTodos()
         {
@@ -42,8 +36,19 @@ namespace frontend_sistema.Controllers
         {
             if(ModelState.IsValid)
             {
-                var response = await _patrocinadorRepository.CreateAsync(patrocinador);
-                return RedirectToAction("Index", "Home");
+                var message = new Message();
+                var response = string.Empty;
+                try
+                {
+                    response = await _patrocinadorRepository.CreateAsync(patrocinador);
+                    message.MessageText = response;
+                    message.IsSuccess = true;
+                }catch (Exception ex)
+                {
+                    message.IsSuccess = false;
+                    message.MessageText = "Falha ao registrar novo patrocinador.";
+                }
+                return RedirectToAction("IndexMessage", "Home", message);
             }
             return View(patrocinador);
         }
@@ -56,6 +61,12 @@ namespace frontend_sistema.Controllers
                 
             }
             return RedirectToAction("MessagePage");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View("Error!");
         }
     }
 }

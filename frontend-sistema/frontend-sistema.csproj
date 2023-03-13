@@ -6,6 +6,9 @@
     <RootNamespace>frontend_sistema</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Views\Shared\_MessagePartial.cshtml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3" />

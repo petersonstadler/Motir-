@@ -20,6 +20,13 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet("[controller]/IndexMessage")]
+    public IActionResult IndexMessage(Message message)
+    {
+        ViewData["Message"] = message;
+        return View("Index");
+    }
+
     public IActionResult Privacy()
     {
         return View();

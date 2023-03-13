@@ -1,5 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home";
+
+    var message = ViewData["Message"] as Message;
+    if (message != null && !String.IsNullOrEmpty(message.MessageText))
+    {
+        <partial name="_MessagePartial" model="@message" />
+    }
 }
 
 <div class="text-center">
