@@ -49,7 +49,7 @@ namespace backend_api.Controllers
         public async Task<ActionResult> Post(Patrocinador patrocinador)
         {
             if(!await _repository.Novo(patrocinador))
-                return NotFound("Falha ao tentar criar patrocinador!");
+                return BadRequest("Falha ao tentar criar patrocinador!");
             return Ok("Patrocinador registrado com sucesso!");
         }
 
@@ -57,15 +57,15 @@ namespace backend_api.Controllers
         public async Task<ActionResult> Put(int id, Patrocinador patrocinador)
         {
             if(!await _repository.Atualizar(id, patrocinador))
-                return NotFound("Falha ao tentar alterar patrocinador!");
+                return BadRequest("Falha ao tentar alterar patrocinador!");
             return Ok("Patrocinador alterado com sucesso!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             if(!await _repository.Deletar(id))
-                return NotFound("Falha ao tentar excluir patrocinador!");
+                return BadRequest("Falha ao tentar excluir patrocinador!");
             return Ok("Patrocinador deletado com sucesso!");
         }
     }
