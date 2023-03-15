@@ -60,5 +60,17 @@ namespace frontend_sistema.Repositories.Implementations
                 throw new Exception(e.Message, e);
             }
         }
+
+        public async Task<string> Delete(int id)
+        {
+            try
+            {
+                return await HttpClientHelper.DeleteAsync("api/Patrocinadores/" + id.ToString());
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
     }
 }

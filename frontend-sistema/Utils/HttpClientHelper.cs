@@ -1,3 +1,5 @@
+using frontend_sistema.Models;
+
 namespace frontend_sistema.Utils
 {
     public static class HttpClientHelper
@@ -47,6 +49,19 @@ namespace frontend_sistema.Utils
                 return await httpResponse.Content.ReadAsStringAsync();
             }
             catch (Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
+
+        public async static Task<string> DeleteAsync(string uriApiAction)
+        {
+            try
+            {
+                var httpResponse = await _httpClient.DeleteAsync(uriApiAction);
+                return await httpResponse.Content.ReadAsStringAsync();
+            }
+            catch(Exception e)
             {
                 throw new Exception(e.Message, e);
             }

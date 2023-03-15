@@ -19,7 +19,12 @@
                     <td>@patrocinador.Nome</td>
                     <td><span class="badge bg-success small">@patrocinador.Status</span></td>
                     <td>@patrocinador.Responsavel</td>
-                    <td><a class="btn btn-primary" asp-action="Alterar" asp-route-id="@patrocinador.Id">alterar</a></td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Alterar" asp-route-id="@patrocinador.Id">alterar</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@patrocinador.Id">Deletar</a>
+                    </td>
                 </tr>
             }
         </tbody>

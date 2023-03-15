@@ -30,7 +30,7 @@ namespace frontend_sistema.Controllers
             {
                 var message = new Message
                 {
-                    MessageText = "Não foi possivel buscar os patrocinadores.",
+                    MessageText = "Nï¿½o foi possivel buscar os patrocinadores.",
                     IsSuccess = false
                 };
                 return RedirectToAction("IndexMessage", "Home", message);
@@ -84,7 +84,7 @@ namespace frontend_sistema.Controllers
         }
 
         [HttpPut("Alterar")]
-        public async Task<IActionResult> Alterar([FromBody] Patrocinador patrocinador)
+        public async Task<IActionResult> Alterar(Patrocinador patrocinador)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +103,25 @@ namespace frontend_sistema.Controllers
                 return RedirectToAction("IndexMessage", "Home", message);
             }
             return View(patrocinador);
+        }
+
+        [HttpGet("Deletar/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var message = new Message();
+            try
+            {
+                string? response = await _patrocinadorRepository.Delete(id);
+                message.IsSuccess = true;
+                message.MessageText = response;
+                return RedirectToAction("IndexMessage", "Home", message);
+            }
+            catch(Exception)
+            {
+                message.IsSuccess = false;
+                message.MessageText = "Falha ao deletar Patrocinador.";
+                return RedirectToAction("IndexMessage", "Home", message);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
