@@ -20,10 +20,8 @@
                     <td><span class="badge bg-success small">@patrocinador.Status</span></td>
                     <td>@patrocinador.Responsavel</td>
                     <td>
-                        <a class="btn btn-primary" asp-action="Alterar" asp-route-id="@patrocinador.Id">alterar</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@patrocinador.Id">Deletar</a>
+                        <a class="btn btn-primary" asp-action="Alterar" asp-route-id="@patrocinador.Id"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@patrocinador.Id"><i class="bi bi-trash"></i></a>
                     </td>
                 </tr>
             }
