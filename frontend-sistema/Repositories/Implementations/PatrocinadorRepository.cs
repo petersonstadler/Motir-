@@ -49,11 +49,11 @@ namespace frontend_sistema.Repositories.Implementations
             }
         }
 
-        public async Task<string> UpdateAsync(Patrocinador patrocinador)
+        public async Task<string> UpdateAsync(int id, Patrocinador patrocinador)
         {
             try
             {
-                return await HttpClientHelper.PutAsync("api/Patrocinadores/" + patrocinador.Id.ToString(), patrocinador);
+                return await HttpClientHelper.PutAsync("api/Patrocinadores/" + id.ToString(), patrocinador);
             }
             catch (Exception e)
             {

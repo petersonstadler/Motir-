@@ -37,24 +37,7 @@ namespace frontend_sistema.Controllers
             }
         }
 
-        [HttpGet("Alterar/{id}")]
-        public async Task<IActionResult> Alterar(int id)
-        {
-            try
-            {
-                Patrocinador? patrocinador = await _patrocinadorRepository.GetById(id);
-                return View(patrocinador);
-            }
-            catch (Exception)
-            {
-                var message = new Message
-                {
-                    MessageText = "Falha ao buscar o patrocinador.",
-                    IsSuccess = false
-                };
-                return RedirectToAction("IndexMessage", "Home", message);
-            }
-        }
+        
 
         [HttpGet("Registrar")]
         public IActionResult Registrar()
@@ -63,6 +46,7 @@ namespace frontend_sistema.Controllers
         }
 
         [HttpPost("Registrar")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registrar(Patrocinador patrocinador)
         {
             if(ModelState.IsValid)
@@ -83,15 +67,35 @@ namespace frontend_sistema.Controllers
             return View(patrocinador);
         }
 
-        [HttpPut("Alterar")]
-        public async Task<IActionResult> Alterar(Patrocinador patrocinador)
+        [HttpGet("Alterar/{id}")]
+        public async Task<IActionResult> Alterar(int id)
+        {
+            try
+            {
+                Patrocinador? patrocinador = await _patrocinadorRepository.GetById(id);
+                return View(patrocinador);
+            }
+            catch (Exception)
+            {
+                var message = new Message
+                {
+                    MessageText = "Falha ao buscar o patrocinador.",
+                    IsSuccess = false
+                };
+                return RedirectToAction("IndexMessage", "Home", message);
+            }
+        }
+
+        [HttpPost("Alterar/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Alterar(int id, Patrocinador patrocinador)
         {
             if (ModelState.IsValid)
             {
                 var message = new Message();
                 try
                 {
-                    string? response = await _patrocinadorRepository.UpdateAsync(patrocinador);
+                    string? response = await _patrocinadorRepository.UpdateAsync(id, patrocinador);
                     message.MessageText = response;
                     message.IsSuccess = true;
                 }
