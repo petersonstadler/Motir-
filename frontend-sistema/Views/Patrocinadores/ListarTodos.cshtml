@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th scope="col">Nome</th>
-                <th scope="col">Status</th>
+                <th scope="col">Resposta/Status</th>
                 <th scope="col">Responsavel</th>
                 <th scope="col"></th>
             </tr>
@@ -17,7 +17,7 @@
             {
                 <tr scope="row">
                     <td>@patrocinador.Nome</td>
-                    <td><span class="badge bg-success small">@patrocinador.Status</span></td>
+                    <td><span class="badge @patrocinador.GetRespostaClassColor() small">@patrocinador.Resposta</span><b> / </b><span class="badge @patrocinador.GetStatusClassColor() small">@patrocinador.Status</span></td>
                     <td>@patrocinador.Responsavel</td>
                     <td>
                         <a class="btn btn-primary" asp-action="Alterar" asp-route-id="@patrocinador.Id"><i class="bi bi-pencil-square"></i></a>

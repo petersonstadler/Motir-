@@ -26,5 +26,37 @@ namespace frontend_sistema.Models
         [Required]
         [Display(Name = "Responsável")]
         public string? Responsavel { get; set; }
+
+        public string GetStatusClassColor()
+        {
+            switch(Status)
+            {
+                case "NAO":
+                    return "bg-danger";
+                case "PENDENTE":
+                    return "bg-warning";
+                case "COM RESPOSÁVEL":
+                    return "bg-primary";
+                case "PAGO":
+                    return "bg-success";
+                default:
+                    return "bg-primary";
+            }
+        }
+
+        public string GetRespostaClassColor()
+        {
+            switch (Resposta)
+            {
+                case "SIM":
+                    return "bg-success";
+                case "NAO":
+                    return "bg-danger";
+                case "PENDENTE":
+                    return "bg-warning";
+                default:
+                    return "bg-primary";
+            }
+        }
     }
 }
