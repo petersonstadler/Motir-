@@ -6,22 +6,34 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Resposta/Status</th>
-                <th scope="col">Responsavel</th>
-                <th scope="col"></th>
+                <th class="col-5" scope="col">
+                    Nome / <span class="text-muted small">Resp.</span>
+                </th>
+                <th class="col-5" scope="col">Resposta/Status</th>
+                @*<th scope="col">Responsavel</th>*@
+                <th class="m-0 p-0" scope="col"></th>
+                <th class="m-0 p-0" scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var patrocinador in Model)
             {
                 <tr scope="row">
-                    <td>@patrocinador.Nome</td>
-                    <td><span class="badge @patrocinador.GetRespostaClassColor() small">@patrocinador.Resposta</span><b> / </b><span class="badge @patrocinador.GetStatusClassColor() small">@patrocinador.Status</span></td>
-                    <td>@patrocinador.Responsavel</td>
                     <td>
-                        <a class="btn btn-primary" asp-action="Alterar" asp-route-id="@patrocinador.Id"><i class="bi bi-pencil-square"></i></a>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@patrocinador.Id"><i class="bi bi-trash"></i></a>
+                        <div class="row">
+                            @patrocinador.Nome
+                        </div>
+                        <div class="row">
+                            <span class="small text-muted">@patrocinador.Responsavel</span>
+                        </div>
+                    </td>
+                    <td><span class="badge @patrocinador.GetRespostaClassColor() small">@patrocinador.Resposta</span><b> / </b><span class="badge @patrocinador.GetStatusClassColor() small">@patrocinador.Status</span></td>
+                    @*<td>@patrocinador.Responsavel</td>*@
+                    <td class="m-0 p-0">
+                        <a class=" btn btn-secondary small" style="border-radius: 3em" asp-action="Alterar" asp-route-id="@patrocinador.Id"><i class="bi bi-pencil-square small"></i></a>
+                    </td>
+                    <td class="m-0 p-0">
+                        <a class=" btn btn-danger small" style="border-radius: 3em" asp-action="Delete" asp-route-id="@patrocinador.Id"><i class="bi bi-trash small"></i></a>
                     </td>
                 </tr>
             }

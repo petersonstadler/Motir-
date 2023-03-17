@@ -51,7 +51,7 @@ namespace frontend_sistema.Models
                 case "SIM":
                     return "bg-success";
                 case "NAO":
-                    return "bg-danger";
+                    return "bg-dark";
                 case "PENDENTE":
                     return "bg-warning";
                 default:
