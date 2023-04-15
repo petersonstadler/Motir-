@@ -9,7 +9,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Olá <b>@User.Identity.Name</b></h1>
+    <h1 class="display-4">Olá <b>@(User.Identity?.Name)</b></h1>
     <br>
     <h2>Acesse:</h2>
     <div class="container flexbox">
