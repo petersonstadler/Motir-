@@ -72,5 +72,19 @@ namespace frontend_sistema.Repositories.Implementations
                 throw new Exception(e.Message, e);
             }
         }
+
+        public async Task<PatrocinadoresPage> GetPaginated(int pageIndex, int pageSize)
+        {
+            try
+            {
+                var apiResult = await HttpClientHelper.GetAsync("api/Patrocinadores/GetPaginated?" + "pageIndex=" + pageIndex + "&pageSize=" + pageSize);
+                var page = JsonConvert.DeserializeObject<PatrocinadoresPage>(apiResult);
+                return page ?? new PatrocinadoresPage();
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message, e);
+            }
+        }
     }
 }

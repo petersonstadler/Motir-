@@ -1,8 +1,16 @@
-@model IEnumerable<frontend_sistema.Models.Patrocinador>
+@model frontend_sistema.Models.PatrocinadoresPage
 
 <h1>Todos Patrocinadores</h1>
 
+@if (Model != null && Model.Patrocinadores != null && Model.Patrocinadores.Any())
+{
 <div class="container">
+
+    @if(Model.Pagination != null)
+    {
+        <partial name="_PaginationPartial" model="@Model.Pagination" />
+    }
+
     <table class="table">
         <thead>
             <tr>
@@ -16,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var patrocinador in Model)
+            @foreach (var patrocinador in Model.Patrocinadores)
             {
                 <tr scope="row">
                     <td>
@@ -39,4 +47,11 @@
             }
         </tbody>
     </table>
+
+    @if (Model.Pagination != null)
+    {
+        <partial name="_PaginationPartial" model="@Model.Pagination" />
+    }
+
 </div>
+}

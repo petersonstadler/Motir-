@@ -68,5 +68,11 @@ namespace backend_api.Controllers
                 return BadRequest("Falha ao tentar excluir patrocinador!");
             return Ok("Patrocinador deletado com sucesso!");
         }
+
+        [HttpGet("GetPaginated")]
+        public async Task<IActionResult> GetPaginated(int pageIndex, int pageSize)
+        {
+            return Ok(await _repository.GetPaginated(pageIndex, pageSize));
+        }
     }
 }

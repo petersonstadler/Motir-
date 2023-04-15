@@ -19,18 +19,27 @@ namespace frontend_sistema.Controllers
         }
 
         [HttpGet("ListarTodos")]
-        public async Task<IActionResult> ListarTodos()
+        public async Task<IActionResult> ListarTodos(int pageIndex = 1, int pageSize = 1)
         {
             try
             {
-                IEnumerable<Patrocinador> patrocinadores = await _patrocinadorRepository.GetAll();
-                return View(patrocinadores);
+                var patrocinadoresPage = await _patrocinadorRepository.GetPaginated(pageIndex, pageSize);
+
+                if(patrocinadoresPage == null)
+                {
+                    return NotFound();
+                }
+
+                if(patrocinadoresPage.Pagination != null)
+                    patrocinadoresPage.Pagination.PagesActionLink = Url.Action("ListarTodos", "Patrocinadores") ?? "/Patrocinadores/ListarTodos";
+
+                return View(patrocinadoresPage);
             }
             catch(Exception)
             {
                 var message = new Message
                 {
-                    MessageText = "N�o foi possivel buscar os patrocinadores.",
+                    MessageText = "Não foi possivel buscar os patrocinadores.",
                     IsSuccess = false
                 };
                 return RedirectToAction("IndexMessage", "Home", message);

@@ -10,5 +10,6 @@ namespace backend_api.Repositories.Interfaces
         Task<bool> Novo(Patrocinador patrocinador);
         Task<bool> Atualizar(int id, Patrocinador newPatrocinador);
         Task<bool> Deletar(int id);
+        Task<PatrocinadoresPage> GetPaginated(int PageIndex, int PageSize);
     }
 }

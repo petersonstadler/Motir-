@@ -1,6 +1,7 @@
 using backend_api.Data;
 using backend_api.Models;
 using backend_api.Repositories.Interfaces;
+using frontend_sistema.Utils;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend_api.Repositories.Implementations
@@ -111,6 +112,34 @@ namespace backend_api.Repositories.Implementations
                 _logger.LogError(e, e.Message);
             }
             return null;
+        }
+
+        public async Task<PatrocinadoresPage> GetPaginated(int PageIndex, int PageSize)
+        {
+            try
+            {
+                var query = _context.Patrocinadores.AsNoTracking()
+                                                   .AsQueryable();
+
+                PaginationHelper pagination = new(PageIndex, PageSize, await query.CountAsync(), "");
+
+                query = query.Skip((PageIndex - 1) * PageSize)
+                             .Take(PageSize)
+                             .OrderByDescending(p => p.Id);
+
+                PatrocinadoresPage patrocinadoresPage = new()
+                {
+                    Pagination = pagination,
+                    Patrocinadores = await query.ToListAsync()
+                };
+
+                return patrocinadoresPage;
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e, e.Message);
+                throw new Exception(e.Message, e);
+            }
         }
     }
 }

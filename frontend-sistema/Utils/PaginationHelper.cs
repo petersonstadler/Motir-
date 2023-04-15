@@ -1,5 +1,3 @@
-using frontend_sistema.Models;
-
 namespace frontend_sistema.Utils
 {
     public class PaginationHelper
@@ -10,12 +8,12 @@ namespace frontend_sistema.Utils
         public int TotalPagesCount { get; set; } = 0;
         public string PagesActionLink { get; set; } = string.Empty;
 
-        public PaginationHelper(int pageIndex, int pageSize , int totalPagesCount, string pagesActionLink) 
+        public PaginationHelper(int pageIndex, int pageSize , int totalItemsCount, string pagesActionLink) 
         {
-            this.PageIndex = pageIndex;
-            this.PageSize = pageSize;
-            this.TotalPagesCount = totalPagesCount;
-            this.PagesActionLink = pagesActionLink;
+            PageIndex = pageIndex;
+            PageSize = pageSize;
+            PagesActionLink = pagesActionLink;
+            TotalPagesCount = (int) Math.Ceiling( (decimal)totalItemsCount / pageSize);
         }
 
         public IQueryable<Object> PaginarColsulta(IQueryable<Object> consulta)

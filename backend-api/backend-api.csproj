@@ -21,4 +21,7 @@
   <ItemGroup>
     <Folder Include="Data\localdb\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\frontend-sistema\frontend-sistema.csproj" />
+  </ItemGroup>
 </Project>

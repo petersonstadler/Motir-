@@ -1,0 +1,46 @@
+@using frontend_sistema.Utils
+@model PaginationHelper
+
+<nav>
+    <ul class="pagination justify-content-center">
+    @if(Model.PageIndex == 1)
+    {
+        <li class="page-item disabled">
+         <span class="page-link">Anterior</span>
+        </li>
+    }
+    else
+    {
+        <li class="page-item">
+                <a href="@getLink(Model.PageIndex - 1)" class="page-link">Anterior</a>
+        </li>
+    }
+    
+        <li class="page-item active">
+            <span class="page-link">
+                @Model.PageIndex de @Model.TotalPagesCount
+            </span>
+        </li>
+
+    @if(Model.PageIndex == Model.TotalPagesCount)
+    {
+        <li class="page-item disabled">
+            <span class="page-link">Próximo</span>
+        </li>
+    }
+    else
+    {
+        <li class="page-item">
+                <a href="@getLink(Model.PageIndex + 1)" class="page-link">Próximo</a>
+        </li>
+    }
+  </ul>
+</nav>
+
+@{
+    string getLink(int page)
+    {
+        var link = Model.PagesActionLink + "?pageIndex=" + page + "&pageSize=" + Model.PageSize;
+        return Model.PagesActionLink + "?pageIndex=" + page + "&pageSize=" + Model.PageSize;
+    }
+}
