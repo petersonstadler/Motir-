@@ -10,7 +10,7 @@ namespace backend_api.Data
             
         }
 
-        public DbSet<Patrocinador> Patrocinadores { get; set; }
+        public DbSet<Patrocinador>? Patrocinadores { get; set; }
 
     }
 }

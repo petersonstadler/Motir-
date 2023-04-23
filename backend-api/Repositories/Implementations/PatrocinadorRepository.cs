@@ -118,19 +118,28 @@ namespace backend_api.Repositories.Implementations
         {
             try
             {
-                var query = _context.Patrocinadores.AsNoTracking()
-                                                   .AsQueryable();
+                var query = _context.Patrocinadores?.AsNoTracking()
+                                                    .AsQueryable();
 
-                PaginationHelper pagination = new(PageIndex, PageSize, await query.CountAsync(), "");
+                int queryCount = 0;
+                if(query != null)
+                    queryCount = await query.CountAsync();
 
-                query = query.Skip((PageIndex - 1) * PageSize)
-                             .Take(PageSize)
-                             .OrderByDescending(p => p.Id);
+                
+                PaginationHelper pagination = new(PageIndex, PageSize, queryCount, "");
+
+                query = query?.Skip((PageIndex - 1) * PageSize)
+                              .Take(PageSize)
+                              .OrderByDescending(p => p.Id);
+
+                var patrocinadores = new List<Patrocinador>();
+                if(query != null)
+                    patrocinadores = await query.ToListAsync();
 
                 PatrocinadoresPage patrocinadoresPage = new()
                 {
                     Pagination = pagination,
-                    Patrocinadores = await query.ToListAsync()
+                    Patrocinadores = patrocinadores
                 };
 
                 return patrocinadoresPage;
